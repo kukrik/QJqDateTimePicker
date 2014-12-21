@@ -6,8 +6,8 @@
 
 		public function  __construct($objParentObject, $strControlId = null) {
 			parent::__construct($objParentObject, $strControlId);
-			$this->AddPluginJavascriptFile("QJqDateTimePicker", "jquery-ui-timepicker-addon-0.9.9.min.js");
-			$this->AddPluginCssFile("QJqDateTimePicker", "jquery-ui-timepicker-addon-0.9.9.css");
+			$this->AddPluginJavascriptFile("QJqDateTimePicker", "jquery-ui-timepicker-addon-1.5.0.min.js");
+			$this->AddPluginCssFile("QJqDateTimePicker", "jquery-ui-timepicker-addon-1.5.0.min.css");
 		}
 
 		static private $mapQC2JQ = array(

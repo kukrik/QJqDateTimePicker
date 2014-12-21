@@ -65,45 +65,142 @@
 	 * 
 	 * @see QJqDateTimePickerBase
 	 * @package Controls\Base
-	 * @property boolean $AlwaysSetTime 
-	 * @property boolean $Ampm 
-	 * @property integer $Hour 
-	 * @property integer $HourMin 
-	 * @property integer $HourMax 
-	 * @property integer $HourGrid 
-	 * @property integer $Minute 
-	 * @property integer $MinuteMin 
-	 * @property integer $MinuteMax 
-	 * @property integer $MinuteGrid 
-	 * @property integer $Second 
-	 * @property integer $SecondMin 
-	 * @property integer $SecondMax 
-	 * @property integer $SecondGrid 
-	 * @property integer $Millisec 
-	 * @property integer $MillisecMin 
-	 * @property integer $MillisecMax 
-	 * @property integer $MillisecGrid 
-	 * @property boolean $ShowButtonPanel 
-	 * @property boolean $ShowHour 
-	 * @property boolean $ShowMinute 
-	 * @property boolean $ShowSecond 
-	 * @property boolean $ShowMillisec 
-	 * @property boolean $ShowTimezone 
-	 * @property boolean $ShowTime 
-	 * @property integer $StepHour 
-	 * @property integer $StepMinute 
-	 * @property integer $StepSecond 
-	 * @property integer $StepMillisec 
-	 * @property string $JqTimeFormat 
-	 * @property boolean $TimeOnly 
-	 * @property string $Separator 
-	 * @property boolean $AltFieldTimeOnly 
-	 * @property boolean $ShowTimepicker 
-	 * @property string $Timezone 
-	 * @property boolean $TimezoneIso8609 
-	 * @property array $TimezoneList 
-	 * @property boolean $AddSliderAccess 
-	 * @property mixed $SliderAccessArgs 
+	 * @property string $CurrentText Default: "Now", A Localization Setting - Text for the Now button.
+	 * @property string $CloseText Default: "Done", A Localization Setting - Text for the Close button.
+	 * @property array $AmNames Default: ['AM', 'A'], A Localization Setting - Array of strings to try and
+	 * 		parse against to determine AM.
+	 * @property array $PmNames Default: ['PM', 'P'], A Localization Setting - Array of strings to try and
+	 * 		parse against to determine PM.
+	 * @property string $JqTimeFormat Default: "HH:mm", A Localization Setting - String of format tokens to be
+	 * 		replaced with the time. See Formatting.
+	 * @property string $TimeSuffix Default: "", A Localization Setting - String to place after the formatted
+	 * 		time.
+	 * @property string $TimeOnlyTitle Default: "Choose Time", A Localization Setting - Title of the wigit when
+	 * 		using only timepicker.
+	 * @property string $TimeText Default: "Time", A Localization Setting - Label used within timepicker for
+	 * 		the formatted time.
+	 * @property string $HourText Default: "Hour", A Localization Setting - Label used to identify the hour
+	 * 		slider.
+	 * @property string $MinuteText Default: "Minute", A Localization Setting - Label used to identify the
+	 * 		minute slider.
+	 * @property string $SecondText Default: "Second", A Localization Setting - Label used to identify the
+	 * 		second slider.
+	 * @property string $MillisecText Default: "Millisecond", A Localization Setting - Label used to identify the
+	 * 		millisecond slider.
+	 * @property string $MicrosecText Default: "Microsecond", A Localization Setting - Label used to identify the
+	 * 		microsecond slider.
+	 * @property string $TimezoneText Default: "Timezone", A Localization Setting - Label used to identify the
+	 * 		timezone slider.
+	 * @property boolean $IsRTL Default: false, A Localization Setting - Right to Left support.
+	 * @property boolean $AltFieldTimeOnly Default: true - When altField is used from datepicker altField will only
+	 * 		receive the formatted time and the original field only receives date.
+	 * @property string $AltSeparator Default: (separator option) - String placed between formatted date and
+	 * 		formatted time in the altField.
+	 * @property string $AltTimeSuffix Default: (timeSuffix option) - String always placed after the formatted
+	 * 		time in the altField.
+	 * @property string $AltTimeFormat Default: (timeFormat option) - The time format to use with the altField.
+	 * @property boolean $AltRedirectFocus Default: true - Whether to immediately focus the main field whenever the
+	 * 		altField receives focus. Effective at construction time only, changing it
+	 * 		later has no effect.
+	 * @property array $TimezoneList Default: [generated timezones] - An array of timezones used to populate the
+	 * 		timezone select. Can be an array of values or an array of objects: { label:
+	 * 		"EDT", value: -240 }.  The value should be the offset number in minutes. 
+	 * 		So "-0400" which is the format "-hhmm", would equate to -240 minutes.
+	 * @property string $ControlType Default: 'slider' - Whether to use 'slider' or 'select'. If 'slider' is
+	 * 		unavailable through jQueryUI, 'select' will be used. For advanced usage you
+	 * 		may pass an object which implements "create", "options", "value" methods to
+	 * 		use controls other than sliders or selects.  See the _controls property in
+	 * 		the source code for more details.  {  	create: function(tp_inst, obj, unit,
+	 * 		val, min, max, step){	  		// generate whatever controls you want here, just
+	 * 		return obj  	},  	options: function(tp_inst, obj, unit, opts, val){  		//
+	 * 		if val==undefined return the value, else return obj  	},  	value:
+	 * 		function(tp_inst, obj, unit, val){  		// if val==undefined return the
+	 * 		value, else return obj  	}  }
+	 * @property boolean $ShowHour Default: null - Whether to show the hour control.  The default of null will
+	 * 		use detection from timeFormat.
+	 * @property boolean $ShowMinute Default: null - Whether to show the minute control.  The default of null
+	 * 		will use detection from timeFormat.
+	 * @property boolean $ShowSecond Default: null - Whether to show the second control.  The default of null
+	 * 		will use detection from timeFormat.
+	 * @property boolean $ShowMillisec Default: null - Whether to show the millisecond control.  The default of
+	 * 		null will use detection from timeFormat.
+	 * @property boolean $ShowMicrosec Default: null - Whether to show the microsecond control.  The default of
+	 * 		null will use detection from timeFormat.
+	 * @property boolean $ShowTimezone Default: null - Whether to show the timezone select.
+	 * @property boolean $ShowTime Default: true - Whether to show the time selected within the
+	 * 		datetimepicker.
+	 * @property integer $StepHour Default: 1 - Hours per step the slider makes.
+	 * @property integer $StepMinute Default: 1 - Minutes per step the slider makes.
+	 * @property integer $StepSecond Default: 1 - Seconds per step the slider makes.
+	 * @property integer $StepMillisec Default: 1 - Milliseconds per step the slider makes.
+	 * @property integer $StepMicrosec Default: 1 - Microseconds per step the slider makes.
+	 * @property integer $Hour Default: 0 - Initial hour set.
+	 * @property integer $Minute Default: 0 - Initial minute set.
+	 * @property integer $Second Default: 0 - Initial second set.
+	 * @property integer $Millisec Default: 0 - Initial millisecond set.
+	 * @property integer $Microsec Default: 0 - Initial microsecond set.  Note: Javascript's native Date
+	 * 		object does not natively support microseconds.  Timepicker adds ability to
+	 * 		simply Date.setMicroseconds(m) and Date.getMicroseconds().  Date
+	 * 		comparisons will not acknowledge microseconds.  Use this only for display
+	 * 		purposes.
+	 * @property string $Timezone Default: null - Initial timezone set.  This is the offset in minutes.  If
+	 * 		null the browser's local timezone will be used.  If you're timezone is
+	 * 		"-0400" you would use -240.  For backwards compatibility you may pass
+	 * 		"-0400", however the timezone is stored in minutes and more reliable.
+	 * @property integer $HourMin Default: 0 - The minimum hour allowed for all dates.
+	 * @property integer $MinuteMin Default: 0 - The minimum minute allowed for all dates.
+	 * @property integer $SecondMin Default: 0 - The minimum second allowed for all dates.
+	 * @property integer $MillisecMin Default: 0 - The minimum millisecond allowed for all dates.
+	 * @property integer $MicrosecMin Default: 0 - The minimum microsecond allowed for all dates.
+	 * @property integer $HourMax Default: 23 - The maximum hour allowed for all dates.
+	 * @property integer $MinuteMax Default: 59 - The maximum minute allowed for all dates.
+	 * @property integer $SecondMax Default: 59 - The maximum second allowed for all dates.
+	 * @property integer $MillisecMax Default: 999 - The maximum millisecond allowed for all dates.
+	 * @property integer $MicrosecMax Default: 999 - The maximum microsecond allowed for all dates.
+	 * @property integer $HourGrid Default: 0 - When greater than 0 a label grid will be generated under the
+	 * 		slider.  This number represents the units (in hours) between labels.
+	 * @property integer $MinuteGrid Default: 0 - When greater than 0 a label grid will be generated under the
+	 * 		slider.  This number represents the units (in minutes) between labels.
+	 * @property integer $SecondGrid Default: 0 - When greater than 0 a label grid will be genereated under the
+	 * 		slider.  This number represents the units (in seconds) between labels.
+	 * @property integer $MillisecGrid Default: 0 - When greater than 0 a label grid will be genereated under the
+	 * 		slider.  This number represents the units (in milliseconds) between labels.
+	 * @property integer $MicrosecGrid Default: 0 - When greater than 0 a label grid will be genereated under the
+	 * 		slider.  This number represents the units (in microseconds) between labels.
+	 * @property boolean $ShowButtonPanel Default: true - Whether to show the button panel at the bottom.  This is
+	 * 		generally needed.
+	 * @property boolean $TimeOnly Default: false - Hide the datepicker and only provide a time interface.
+	 * @property boolean $TimeOnlyShowDate Default: false - Show the date and time in the input, but only allow the
+	 * 		timepicker.
+	 * @property string $OnSelect Default: null - Function to be called when a date is chosen or time has
+	 * 		changed (parameters: datetimeText, datepickerInstance).
+	 * @property boolean $AlwaysSetTime Default: true - Always have a time set internally, even before user has
+	 * 		chosen one.
+	 * @property string $Separator Default: " " - When formatting the time this string is placed between the
+	 * 		formatted date and formatted time.
+	 * @property string $PickerTimeFormat Default: (timeFormat option) - How to format the time displayed within the
+	 * 		timepicker.
+	 * @property string $PickerTimeSuffix Default: (timeSuffix option) - String to place after the formatted time
+	 * 		within the timepicker.
+	 * @property boolean $ShowTimepicker Default: true - Whether to show the timepicker within the datepicker.
+	 * @property boolean $AddSliderAccess Default: false - Adds the sliderAccess plugin to sliders within timepicker
+	 * @property string $SliderAccessArgs Default: null - Object to pass to sliderAccess when used.
+	 * @property string $DefaultValue Default: null - String of the default time value placed in the input on
+	 * 		focus when the input is empty.
+	 * @property string $MinDateTime Default: null - Date object of the minimum datetime allowed.  Also
+	 * 		available as minDate.
+	 * @property string $MaxDateTime Default: null - Date object of the maximum datetime allowed. Also Available
+	 * 		as maxDate.
+	 * @property string $MinTime Default: null - String of the minimum time allowed. '8:00 am' will restrict
+	 * 		to times after 8am
+	 * @property string $MaxTime Default: null - String of the maximum time allowed. '8:00 pm' will restrict
+	 * 		to times before 8pm
+	 * @property string $Parse Default: 'strict' - How to parse the time string.  Two methods are
+	 * 		provided: 'strict' which must match the timeFormat exactly, and 'loose'
+	 * 		which uses javascript's new Date(timeString) to guess the time.  You may
+	 * 		also pass in a function(timeFormat, timeString, options) to handle the
+	 * 		parsing yourself, returning a simple object:   {  	hour: 19,  	minute: 10, 
+	 * 			second: 23,  	millisec: 45,  	microsec: 23,  	timezone: '-0400'  }
 	 * @property QJsClosure $BeforeShow null
 	 * @property QJsClosure $OnChangeMonthYear null
 	 * @property QJsClosure $OnClose null
@@ -112,54 +209,62 @@
 	class QJqDateTimePickerGen extends QDatepickerBox	{
 		protected $strJavaScripts = __JQUERY_EFFECTS__;
 		protected $strStyleSheets = __JQUERY_CSS__;
+		/** @var string */
+		protected $strCurrentText;
+		/** @var string */
+		protected $strCloseText;
+		/** @var array */
+		protected $arrAmNames;
+		/** @var array */
+		protected $arrPmNames;
+		/** @var string */
+		protected $strJqTimeFormat;
+		/** @var string */
+		protected $strTimeSuffix;
+		/** @var string */
+		protected $strTimeOnlyTitle;
+		/** @var string */
+		protected $strTimeText;
+		/** @var string */
+		protected $strHourText;
+		/** @var string */
+		protected $strMinuteText;
+		/** @var string */
+		protected $strSecondText;
+		/** @var string */
+		protected $strMillisecText;
+		/** @var string */
+		protected $strMicrosecText;
+		/** @var string */
+		protected $strTimezoneText;
 		/** @var boolean */
-		protected $blnAlwaysSetTime = null;
+		protected $blnIsRTL = null;
 		/** @var boolean */
-		protected $blnAmpm = null;
-		/** @var integer */
-		protected $intHour;
-		/** @var integer */
-		protected $intHourMin;
-		/** @var integer */
-		protected $intHourMax = null;
-		/** @var integer */
-		protected $intHourGrid;
-		/** @var integer */
-		protected $intMinute;
-		/** @var integer */
-		protected $intMinuteMin;
-		/** @var integer */
-		protected $intMinuteMax = null;
-		/** @var integer */
-		protected $intMinuteGrid;
-		/** @var integer */
-		protected $intSecond;
-		/** @var integer */
-		protected $intSecondMin;
-		/** @var integer */
-		protected $intSecondMax = null;
-		/** @var integer */
-		protected $intSecondGrid;
-		/** @var integer */
-		protected $intMillisec;
-		/** @var integer */
-		protected $intMillisecMin;
-		/** @var integer */
-		protected $intMillisecMax = null;
-		/** @var integer */
-		protected $intMillisecGrid;
+		protected $blnAltFieldTimeOnly = null;
+		/** @var string */
+		protected $strAltSeparator;
+		/** @var string */
+		protected $strAltTimeSuffix;
+		/** @var string */
+		protected $strAltTimeFormat;
 		/** @var boolean */
-		protected $blnShowButtonPanel = null;
+		protected $blnAltRedirectFocus = null;
+		/** @var array */
+		protected $arrTimezoneList;
+		/** @var string */
+		protected $strControlType;
 		/** @var boolean */
-		protected $blnShowHour = null;
+		protected $blnShowHour;
 		/** @var boolean */
-		protected $blnShowMinute = null;
+		protected $blnShowMinute;
 		/** @var boolean */
-		protected $blnShowSecond = null;
+		protected $blnShowSecond;
 		/** @var boolean */
-		protected $blnShowMillisec = null;
+		protected $blnShowMillisec;
 		/** @var boolean */
-		protected $blnShowTimezone = null;
+		protected $blnShowMicrosec;
+		/** @var boolean */
+		protected $blnShowTimezone;
 		/** @var boolean */
 		protected $blnShowTime = null;
 		/** @var integer */
@@ -170,26 +275,84 @@
 		protected $intStepSecond = null;
 		/** @var integer */
 		protected $intStepMillisec = null;
+		/** @var integer */
+		protected $intStepMicrosec = null;
+		/** @var integer */
+		protected $intHour;
+		/** @var integer */
+		protected $intMinute;
+		/** @var integer */
+		protected $intSecond;
+		/** @var integer */
+		protected $intMillisec;
+		/** @var integer */
+		protected $intMicrosec;
 		/** @var string */
-		protected $strJqTimeFormat;
+		protected $strTimezone;
+		/** @var integer */
+		protected $intHourMin;
+		/** @var integer */
+		protected $intMinuteMin;
+		/** @var integer */
+		protected $intSecondMin;
+		/** @var integer */
+		protected $intMillisecMin;
+		/** @var integer */
+		protected $intMicrosecMin;
+		/** @var integer */
+		protected $intHourMax = null;
+		/** @var integer */
+		protected $intMinuteMax = null;
+		/** @var integer */
+		protected $intSecondMax = null;
+		/** @var integer */
+		protected $intMillisecMax = null;
+		/** @var integer */
+		protected $intMicrosecMax = null;
+		/** @var integer */
+		protected $intHourGrid;
+		/** @var integer */
+		protected $intMinuteGrid;
+		/** @var integer */
+		protected $intSecondGrid;
+		/** @var integer */
+		protected $intMillisecGrid;
+		/** @var integer */
+		protected $intMicrosecGrid;
+		/** @var boolean */
+		protected $blnShowButtonPanel = null;
 		/** @var boolean */
 		protected $blnTimeOnly = null;
+		/** @var boolean */
+		protected $blnTimeOnlyShowDate = null;
+		/** @var string */
+		protected $strOnSelect;
+		/** @var boolean */
+		protected $blnAlwaysSetTime = null;
 		/** @var string */
 		protected $strSeparator;
-		/** @var boolean */
-		protected $blnAltFieldTimeOnly = null;
+		/** @var string */
+		protected $strPickerTimeFormat;
+		/** @var string */
+		protected $strPickerTimeSuffix;
 		/** @var boolean */
 		protected $blnShowTimepicker = null;
-		/** @var string */
-		protected $strTimezone = null;
-		/** @var boolean */
-		protected $blnTimezoneIso8609 = null;
-		/** @var array */
-		protected $arrTimezoneList = null;
 		/** @var boolean */
 		protected $blnAddSliderAccess = null;
-		/** @var mixed */
-		protected $mixSliderAccessArgs = null;
+		/** @var string */
+		protected $strSliderAccessArgs;
+		/** @var string */
+		protected $strDefaultValue;
+		/** @var string */
+		protected $strMinDateTime;
+		/** @var string */
+		protected $strMaxDateTime;
+		/** @var string */
+		protected $strMinTime;
+		/** @var string */
+		protected $strMaxTime;
+		/** @var string */
+		protected $strParse;
 		/** @var QJsClosure */
 		protected $mixBeforeShow = null;
 		/** @var QJsClosure */
@@ -209,45 +372,78 @@
 		protected function makeJqOptions() {
 			$strJqOptions = parent::makeJqOptions();
 			if ($strJqOptions) $strJqOptions .= ', ';
-			$strJqOptions .= $this->makeJsProperty('AlwaysSetTime', 'alwaysSetTime');
-			$strJqOptions .= $this->makeJsProperty('Ampm', 'ampm');
-			$strJqOptions .= $this->makeJsProperty('Hour', 'hour');
-			$strJqOptions .= $this->makeJsProperty('HourMin', 'hourMin');
-			$strJqOptions .= $this->makeJsProperty('HourMax', 'hourMax');
-			$strJqOptions .= $this->makeJsProperty('HourGrid', 'hourGrid');
-			$strJqOptions .= $this->makeJsProperty('Minute', 'minute');
-			$strJqOptions .= $this->makeJsProperty('MinuteMin', 'minuteMin');
-			$strJqOptions .= $this->makeJsProperty('MinuteMax', 'minuteMax');
-			$strJqOptions .= $this->makeJsProperty('MinuteGrid', 'minuteGrid');
-			$strJqOptions .= $this->makeJsProperty('Second', 'second');
-			$strJqOptions .= $this->makeJsProperty('SecondMin', 'secondMin');
-			$strJqOptions .= $this->makeJsProperty('SecondMax', 'secondMax');
-			$strJqOptions .= $this->makeJsProperty('SecondGrid', 'secondGrid');
-			$strJqOptions .= $this->makeJsProperty('Millisec', 'millisec');
-			$strJqOptions .= $this->makeJsProperty('MillisecMin', 'millisecMin');
-			$strJqOptions .= $this->makeJsProperty('MillisecMax', 'millisecMax');
-			$strJqOptions .= $this->makeJsProperty('MillisecGrid', 'millisecGrid');
-			$strJqOptions .= $this->makeJsProperty('ShowButtonPanel', 'showButtonPanel');
+			$strJqOptions .= $this->makeJsProperty('CurrentText', 'currentText');
+			$strJqOptions .= $this->makeJsProperty('CloseText', 'closeText');
+			$strJqOptions .= $this->makeJsProperty('AmNames', 'amNames');
+			$strJqOptions .= $this->makeJsProperty('PmNames', 'pmNames');
+			$strJqOptions .= $this->makeJsProperty('JqTimeFormat', 'timeFormat');
+			$strJqOptions .= $this->makeJsProperty('TimeSuffix', 'timeSuffix');
+			$strJqOptions .= $this->makeJsProperty('TimeOnlyTitle', 'timeOnlyTitle');
+			$strJqOptions .= $this->makeJsProperty('TimeText', 'timeText');
+			$strJqOptions .= $this->makeJsProperty('HourText', 'hourText');
+			$strJqOptions .= $this->makeJsProperty('MinuteText', 'minuteText');
+			$strJqOptions .= $this->makeJsProperty('SecondText', 'secondText');
+			$strJqOptions .= $this->makeJsProperty('MillisecText', 'millisecText');
+			$strJqOptions .= $this->makeJsProperty('MicrosecText', 'microsecText');
+			$strJqOptions .= $this->makeJsProperty('TimezoneText', 'timezoneText');
+			$strJqOptions .= $this->makeJsProperty('IsRTL', 'isRTL');
+			$strJqOptions .= $this->makeJsProperty('AltFieldTimeOnly', 'altFieldTimeOnly');
+			$strJqOptions .= $this->makeJsProperty('AltSeparator', 'altSeparator');
+			$strJqOptions .= $this->makeJsProperty('AltTimeSuffix', 'altTimeSuffix');
+			$strJqOptions .= $this->makeJsProperty('AltTimeFormat', 'altTimeFormat');
+			$strJqOptions .= $this->makeJsProperty('AltRedirectFocus', 'altRedirectFocus');
+			$strJqOptions .= $this->makeJsProperty('TimezoneList', 'timezoneList');
+			$strJqOptions .= $this->makeJsProperty('ControlType', 'controlType');
 			$strJqOptions .= $this->makeJsProperty('ShowHour', 'showHour');
 			$strJqOptions .= $this->makeJsProperty('ShowMinute', 'showMinute');
 			$strJqOptions .= $this->makeJsProperty('ShowSecond', 'showSecond');
 			$strJqOptions .= $this->makeJsProperty('ShowMillisec', 'showMillisec');
+			$strJqOptions .= $this->makeJsProperty('ShowMicrosec', 'showMicrosec');
 			$strJqOptions .= $this->makeJsProperty('ShowTimezone', 'showTimezone');
 			$strJqOptions .= $this->makeJsProperty('ShowTime', 'showTime');
 			$strJqOptions .= $this->makeJsProperty('StepHour', 'stepHour');
 			$strJqOptions .= $this->makeJsProperty('StepMinute', 'stepMinute');
 			$strJqOptions .= $this->makeJsProperty('StepSecond', 'stepSecond');
 			$strJqOptions .= $this->makeJsProperty('StepMillisec', 'stepMillisec');
-			$strJqOptions .= $this->makeJsProperty('JqTimeFormat', 'timeFormat');
-			$strJqOptions .= $this->makeJsProperty('TimeOnly', 'timeOnly');
-			$strJqOptions .= $this->makeJsProperty('Separator', 'separator');
-			$strJqOptions .= $this->makeJsProperty('AltFieldTimeOnly', 'altFieldTimeOnly');
-			$strJqOptions .= $this->makeJsProperty('ShowTimepicker', 'showTimepicker');
+			$strJqOptions .= $this->makeJsProperty('StepMicrosec', 'stepMicrosec');
+			$strJqOptions .= $this->makeJsProperty('Hour', 'hour');
+			$strJqOptions .= $this->makeJsProperty('Minute', 'minute');
+			$strJqOptions .= $this->makeJsProperty('Second', 'second');
+			$strJqOptions .= $this->makeJsProperty('Millisec', 'millisec');
+			$strJqOptions .= $this->makeJsProperty('Microsec', 'microsec');
 			$strJqOptions .= $this->makeJsProperty('Timezone', 'timezone');
-			$strJqOptions .= $this->makeJsProperty('TimezoneIso8609', 'timezoneIso8609');
-			$strJqOptions .= $this->makeJsProperty('TimezoneList', 'timezoneList');
+			$strJqOptions .= $this->makeJsProperty('HourMin', 'hourMin');
+			$strJqOptions .= $this->makeJsProperty('MinuteMin', 'minuteMin');
+			$strJqOptions .= $this->makeJsProperty('SecondMin', 'secondMin');
+			$strJqOptions .= $this->makeJsProperty('MillisecMin', 'millisecMin');
+			$strJqOptions .= $this->makeJsProperty('MicrosecMin', 'microsecMin');
+			$strJqOptions .= $this->makeJsProperty('HourMax', 'hourMax');
+			$strJqOptions .= $this->makeJsProperty('MinuteMax', 'minuteMax');
+			$strJqOptions .= $this->makeJsProperty('SecondMax', 'secondMax');
+			$strJqOptions .= $this->makeJsProperty('MillisecMax', 'millisecMax');
+			$strJqOptions .= $this->makeJsProperty('MicrosecMax', 'microsecMax');
+			$strJqOptions .= $this->makeJsProperty('HourGrid', 'hourGrid');
+			$strJqOptions .= $this->makeJsProperty('MinuteGrid', 'minuteGrid');
+			$strJqOptions .= $this->makeJsProperty('SecondGrid', 'secondGrid');
+			$strJqOptions .= $this->makeJsProperty('MillisecGrid', 'millisecGrid');
+			$strJqOptions .= $this->makeJsProperty('MicrosecGrid', 'microsecGrid');
+			$strJqOptions .= $this->makeJsProperty('ShowButtonPanel', 'showButtonPanel');
+			$strJqOptions .= $this->makeJsProperty('TimeOnly', 'timeOnly');
+			$strJqOptions .= $this->makeJsProperty('TimeOnlyShowDate', 'timeOnlyShowDate');
+			$strJqOptions .= $this->makeJsProperty('OnSelect', 'onSelect');
+			$strJqOptions .= $this->makeJsProperty('AlwaysSetTime', 'alwaysSetTime');
+			$strJqOptions .= $this->makeJsProperty('Separator', 'separator');
+			$strJqOptions .= $this->makeJsProperty('PickerTimeFormat', 'pickerTimeFormat');
+			$strJqOptions .= $this->makeJsProperty('PickerTimeSuffix', 'pickerTimeSuffix');
+			$strJqOptions .= $this->makeJsProperty('ShowTimepicker', 'showTimepicker');
 			$strJqOptions .= $this->makeJsProperty('AddSliderAccess', 'addSliderAccess');
 			$strJqOptions .= $this->makeJsProperty('SliderAccessArgs', 'sliderAccessArgs');
+			$strJqOptions .= $this->makeJsProperty('DefaultValue', 'defaultValue');
+			$strJqOptions .= $this->makeJsProperty('MinDateTime', 'minDateTime');
+			$strJqOptions .= $this->makeJsProperty('MaxDateTime', 'maxDateTime');
+			$strJqOptions .= $this->makeJsProperty('MinTime', 'minTime');
+			$strJqOptions .= $this->makeJsProperty('MaxTime', 'maxTime');
+			$strJqOptions .= $this->makeJsProperty('Parse', 'parse');
 			$strJqOptions .= $this->makeJsProperty('BeforeShow', 'beforeShow');
 			$strJqOptions .= $this->makeJsProperty('OnChangeMonthYear', 'onChangeMonthYear');
 			$strJqOptions .= $this->makeJsProperty('OnClose', 'onClose');
@@ -309,45 +505,78 @@
 
 		public function __get($strName) {
 			switch ($strName) {
-				case 'AlwaysSetTime': return $this->blnAlwaysSetTime;
-				case 'Ampm': return $this->blnAmpm;
-				case 'Hour': return $this->intHour;
-				case 'HourMin': return $this->intHourMin;
-				case 'HourMax': return $this->intHourMax;
-				case 'HourGrid': return $this->intHourGrid;
-				case 'Minute': return $this->intMinute;
-				case 'MinuteMin': return $this->intMinuteMin;
-				case 'MinuteMax': return $this->intMinuteMax;
-				case 'MinuteGrid': return $this->intMinuteGrid;
-				case 'Second': return $this->intSecond;
-				case 'SecondMin': return $this->intSecondMin;
-				case 'SecondMax': return $this->intSecondMax;
-				case 'SecondGrid': return $this->intSecondGrid;
-				case 'Millisec': return $this->intMillisec;
-				case 'MillisecMin': return $this->intMillisecMin;
-				case 'MillisecMax': return $this->intMillisecMax;
-				case 'MillisecGrid': return $this->intMillisecGrid;
-				case 'ShowButtonPanel': return $this->blnShowButtonPanel;
+				case 'CurrentText': return $this->strCurrentText;
+				case 'CloseText': return $this->strCloseText;
+				case 'AmNames': return $this->arrAmNames;
+				case 'PmNames': return $this->arrPmNames;
+				case 'JqTimeFormat': return $this->strJqTimeFormat;
+				case 'TimeSuffix': return $this->strTimeSuffix;
+				case 'TimeOnlyTitle': return $this->strTimeOnlyTitle;
+				case 'TimeText': return $this->strTimeText;
+				case 'HourText': return $this->strHourText;
+				case 'MinuteText': return $this->strMinuteText;
+				case 'SecondText': return $this->strSecondText;
+				case 'MillisecText': return $this->strMillisecText;
+				case 'MicrosecText': return $this->strMicrosecText;
+				case 'TimezoneText': return $this->strTimezoneText;
+				case 'IsRTL': return $this->blnIsRTL;
+				case 'AltFieldTimeOnly': return $this->blnAltFieldTimeOnly;
+				case 'AltSeparator': return $this->strAltSeparator;
+				case 'AltTimeSuffix': return $this->strAltTimeSuffix;
+				case 'AltTimeFormat': return $this->strAltTimeFormat;
+				case 'AltRedirectFocus': return $this->blnAltRedirectFocus;
+				case 'TimezoneList': return $this->arrTimezoneList;
+				case 'ControlType': return $this->strControlType;
 				case 'ShowHour': return $this->blnShowHour;
 				case 'ShowMinute': return $this->blnShowMinute;
 				case 'ShowSecond': return $this->blnShowSecond;
 				case 'ShowMillisec': return $this->blnShowMillisec;
+				case 'ShowMicrosec': return $this->blnShowMicrosec;
 				case 'ShowTimezone': return $this->blnShowTimezone;
 				case 'ShowTime': return $this->blnShowTime;
 				case 'StepHour': return $this->intStepHour;
 				case 'StepMinute': return $this->intStepMinute;
 				case 'StepSecond': return $this->intStepSecond;
 				case 'StepMillisec': return $this->intStepMillisec;
-				case 'JqTimeFormat': return $this->strJqTimeFormat;
-				case 'TimeOnly': return $this->blnTimeOnly;
-				case 'Separator': return $this->strSeparator;
-				case 'AltFieldTimeOnly': return $this->blnAltFieldTimeOnly;
-				case 'ShowTimepicker': return $this->blnShowTimepicker;
+				case 'StepMicrosec': return $this->intStepMicrosec;
+				case 'Hour': return $this->intHour;
+				case 'Minute': return $this->intMinute;
+				case 'Second': return $this->intSecond;
+				case 'Millisec': return $this->intMillisec;
+				case 'Microsec': return $this->intMicrosec;
 				case 'Timezone': return $this->strTimezone;
-				case 'TimezoneIso8609': return $this->blnTimezoneIso8609;
-				case 'TimezoneList': return $this->arrTimezoneList;
+				case 'HourMin': return $this->intHourMin;
+				case 'MinuteMin': return $this->intMinuteMin;
+				case 'SecondMin': return $this->intSecondMin;
+				case 'MillisecMin': return $this->intMillisecMin;
+				case 'MicrosecMin': return $this->intMicrosecMin;
+				case 'HourMax': return $this->intHourMax;
+				case 'MinuteMax': return $this->intMinuteMax;
+				case 'SecondMax': return $this->intSecondMax;
+				case 'MillisecMax': return $this->intMillisecMax;
+				case 'MicrosecMax': return $this->intMicrosecMax;
+				case 'HourGrid': return $this->intHourGrid;
+				case 'MinuteGrid': return $this->intMinuteGrid;
+				case 'SecondGrid': return $this->intSecondGrid;
+				case 'MillisecGrid': return $this->intMillisecGrid;
+				case 'MicrosecGrid': return $this->intMicrosecGrid;
+				case 'ShowButtonPanel': return $this->blnShowButtonPanel;
+				case 'TimeOnly': return $this->blnTimeOnly;
+				case 'TimeOnlyShowDate': return $this->blnTimeOnlyShowDate;
+				case 'OnSelect': return $this->strOnSelect;
+				case 'AlwaysSetTime': return $this->blnAlwaysSetTime;
+				case 'Separator': return $this->strSeparator;
+				case 'PickerTimeFormat': return $this->strPickerTimeFormat;
+				case 'PickerTimeSuffix': return $this->strPickerTimeSuffix;
+				case 'ShowTimepicker': return $this->blnShowTimepicker;
 				case 'AddSliderAccess': return $this->blnAddSliderAccess;
-				case 'SliderAccessArgs': return $this->mixSliderAccessArgs;
+				case 'SliderAccessArgs': return $this->strSliderAccessArgs;
+				case 'DefaultValue': return $this->strDefaultValue;
+				case 'MinDateTime': return $this->strMinDateTime;
+				case 'MaxDateTime': return $this->strMaxDateTime;
+				case 'MinTime': return $this->strMinTime;
+				case 'MaxTime': return $this->strMaxTime;
+				case 'Parse': return $this->strParse;
 				case 'BeforeShow': return $this->mixBeforeShow;
 				case 'OnChangeMonthYear': return $this->mixOnChangeMonthYear;
 				case 'OnClose': return $this->mixOnClose;
@@ -363,11 +592,11 @@
 
 		public function __set($strName, $mixValue) {
 			switch ($strName) {
-				case 'AlwaysSetTime':
+				case 'CurrentText':
 					try {
-						$this->blnAlwaysSetTime = QType::Cast($mixValue, QType::Boolean);
+						$this->strCurrentText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'alwaysSetTime', $this->blnAlwaysSetTime);
+							$this->CallJqUiMethod(true, 'option', 'currentText', $this->strCurrentText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -375,11 +604,11 @@
 						throw $objExc;
 					}
 
-				case 'Ampm':
+				case 'CloseText':
 					try {
-						$this->blnAmpm = QType::Cast($mixValue, QType::Boolean);
+						$this->strCloseText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'ampm', $this->blnAmpm);
+							$this->CallJqUiMethod(true, 'option', 'closeText', $this->strCloseText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -387,11 +616,11 @@
 						throw $objExc;
 					}
 
-				case 'Hour':
+				case 'AmNames':
 					try {
-						$this->intHour = QType::Cast($mixValue, QType::Integer);
+						$this->arrAmNames = QType::Cast($mixValue, QType::ArrayType);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'hour', $this->intHour);
+							$this->CallJqUiMethod(true, 'option', 'amNames', $this->arrAmNames);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -399,11 +628,11 @@
 						throw $objExc;
 					}
 
-				case 'HourMin':
+				case 'PmNames':
 					try {
-						$this->intHourMin = QType::Cast($mixValue, QType::Integer);
+						$this->arrPmNames = QType::Cast($mixValue, QType::ArrayType);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'hourMin', $this->intHourMin);
+							$this->CallJqUiMethod(true, 'option', 'pmNames', $this->arrPmNames);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -411,11 +640,11 @@
 						throw $objExc;
 					}
 
-				case 'HourMax':
+				case 'JqTimeFormat':
 					try {
-						$this->intHourMax = QType::Cast($mixValue, QType::Integer);
+						$this->strJqTimeFormat = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'hourMax', $this->intHourMax);
+							$this->CallJqUiMethod(true, 'option', 'timeFormat', $this->strJqTimeFormat);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -423,11 +652,11 @@
 						throw $objExc;
 					}
 
-				case 'HourGrid':
+				case 'TimeSuffix':
 					try {
-						$this->intHourGrid = QType::Cast($mixValue, QType::Integer);
+						$this->strTimeSuffix = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'hourGrid', $this->intHourGrid);
+							$this->CallJqUiMethod(true, 'option', 'timeSuffix', $this->strTimeSuffix);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -435,11 +664,11 @@
 						throw $objExc;
 					}
 
-				case 'Minute':
+				case 'TimeOnlyTitle':
 					try {
-						$this->intMinute = QType::Cast($mixValue, QType::Integer);
+						$this->strTimeOnlyTitle = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'minute', $this->intMinute);
+							$this->CallJqUiMethod(true, 'option', 'timeOnlyTitle', $this->strTimeOnlyTitle);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -447,11 +676,11 @@
 						throw $objExc;
 					}
 
-				case 'MinuteMin':
+				case 'TimeText':
 					try {
-						$this->intMinuteMin = QType::Cast($mixValue, QType::Integer);
+						$this->strTimeText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'minuteMin', $this->intMinuteMin);
+							$this->CallJqUiMethod(true, 'option', 'timeText', $this->strTimeText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -459,11 +688,11 @@
 						throw $objExc;
 					}
 
-				case 'MinuteMax':
+				case 'HourText':
 					try {
-						$this->intMinuteMax = QType::Cast($mixValue, QType::Integer);
+						$this->strHourText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'minuteMax', $this->intMinuteMax);
+							$this->CallJqUiMethod(true, 'option', 'hourText', $this->strHourText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -471,11 +700,11 @@
 						throw $objExc;
 					}
 
-				case 'MinuteGrid':
+				case 'MinuteText':
 					try {
-						$this->intMinuteGrid = QType::Cast($mixValue, QType::Integer);
+						$this->strMinuteText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'minuteGrid', $this->intMinuteGrid);
+							$this->CallJqUiMethod(true, 'option', 'minuteText', $this->strMinuteText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -483,11 +712,11 @@
 						throw $objExc;
 					}
 
-				case 'Second':
+				case 'SecondText':
 					try {
-						$this->intSecond = QType::Cast($mixValue, QType::Integer);
+						$this->strSecondText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'second', $this->intSecond);
+							$this->CallJqUiMethod(true, 'option', 'secondText', $this->strSecondText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -495,11 +724,11 @@
 						throw $objExc;
 					}
 
-				case 'SecondMin':
+				case 'MillisecText':
 					try {
-						$this->intSecondMin = QType::Cast($mixValue, QType::Integer);
+						$this->strMillisecText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'secondMin', $this->intSecondMin);
+							$this->CallJqUiMethod(true, 'option', 'millisecText', $this->strMillisecText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -507,11 +736,11 @@
 						throw $objExc;
 					}
 
-				case 'SecondMax':
+				case 'MicrosecText':
 					try {
-						$this->intSecondMax = QType::Cast($mixValue, QType::Integer);
+						$this->strMicrosecText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'secondMax', $this->intSecondMax);
+							$this->CallJqUiMethod(true, 'option', 'microsecText', $this->strMicrosecText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -519,11 +748,11 @@
 						throw $objExc;
 					}
 
-				case 'SecondGrid':
+				case 'TimezoneText':
 					try {
-						$this->intSecondGrid = QType::Cast($mixValue, QType::Integer);
+						$this->strTimezoneText = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'secondGrid', $this->intSecondGrid);
+							$this->CallJqUiMethod(true, 'option', 'timezoneText', $this->strTimezoneText);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -531,11 +760,11 @@
 						throw $objExc;
 					}
 
-				case 'Millisec':
+				case 'IsRTL':
 					try {
-						$this->intMillisec = QType::Cast($mixValue, QType::Integer);
+						$this->blnIsRTL = QType::Cast($mixValue, QType::Boolean);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'millisec', $this->intMillisec);
+							$this->CallJqUiMethod(true, 'option', 'isRTL', $this->blnIsRTL);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -543,11 +772,11 @@
 						throw $objExc;
 					}
 
-				case 'MillisecMin':
+				case 'AltFieldTimeOnly':
 					try {
-						$this->intMillisecMin = QType::Cast($mixValue, QType::Integer);
+						$this->blnAltFieldTimeOnly = QType::Cast($mixValue, QType::Boolean);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'millisecMin', $this->intMillisecMin);
+							$this->CallJqUiMethod(true, 'option', 'altFieldTimeOnly', $this->blnAltFieldTimeOnly);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -555,11 +784,11 @@
 						throw $objExc;
 					}
 
-				case 'MillisecMax':
+				case 'AltSeparator':
 					try {
-						$this->intMillisecMax = QType::Cast($mixValue, QType::Integer);
+						$this->strAltSeparator = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'millisecMax', $this->intMillisecMax);
+							$this->CallJqUiMethod(true, 'option', 'altSeparator', $this->strAltSeparator);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -567,11 +796,11 @@
 						throw $objExc;
 					}
 
-				case 'MillisecGrid':
+				case 'AltTimeSuffix':
 					try {
-						$this->intMillisecGrid = QType::Cast($mixValue, QType::Integer);
+						$this->strAltTimeSuffix = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'millisecGrid', $this->intMillisecGrid);
+							$this->CallJqUiMethod(true, 'option', 'altTimeSuffix', $this->strAltTimeSuffix);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -579,11 +808,47 @@
 						throw $objExc;
 					}
 
-				case 'ShowButtonPanel':
+				case 'AltTimeFormat':
 					try {
-						$this->blnShowButtonPanel = QType::Cast($mixValue, QType::Boolean);
+						$this->strAltTimeFormat = QType::Cast($mixValue, QType::String);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'showButtonPanel', $this->blnShowButtonPanel);
+							$this->CallJqUiMethod(true, 'option', 'altTimeFormat', $this->strAltTimeFormat);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'AltRedirectFocus':
+					try {
+						$this->blnAltRedirectFocus = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'altRedirectFocus', $this->blnAltRedirectFocus);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'TimezoneList':
+					try {
+						$this->arrTimezoneList = QType::Cast($mixValue, QType::ArrayType);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'timezoneList', $this->arrTimezoneList);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'ControlType':
+					try {
+						$this->strControlType = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'controlType', $this->strControlType);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -632,6 +897,18 @@
 						$this->blnShowMillisec = QType::Cast($mixValue, QType::Boolean);
 						if ($this->OnPage) {
 							$this->CallJqUiMethod(true, 'option', 'showMillisec', $this->blnShowMillisec);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'ShowMicrosec':
+					try {
+						$this->blnShowMicrosec = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'showMicrosec', $this->blnShowMicrosec);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -711,11 +988,11 @@
 						throw $objExc;
 					}
 
-				case 'JqTimeFormat':
+				case 'StepMicrosec':
 					try {
-						$this->strJqTimeFormat = QType::Cast($mixValue, QType::String);
+						$this->intStepMicrosec = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'timeFormat', $this->strJqTimeFormat);
+							$this->CallJqUiMethod(true, 'option', 'stepMicrosec', $this->intStepMicrosec);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -723,11 +1000,11 @@
 						throw $objExc;
 					}
 
-				case 'TimeOnly':
+				case 'Hour':
 					try {
-						$this->blnTimeOnly = QType::Cast($mixValue, QType::Boolean);
+						$this->intHour = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'timeOnly', $this->blnTimeOnly);
+							$this->CallJqUiMethod(true, 'option', 'hour', $this->intHour);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -735,11 +1012,11 @@
 						throw $objExc;
 					}
 
-				case 'Separator':
+				case 'Minute':
 					try {
-						$this->strSeparator = QType::Cast($mixValue, QType::String);
+						$this->intMinute = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'separator', $this->strSeparator);
+							$this->CallJqUiMethod(true, 'option', 'minute', $this->intMinute);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -747,11 +1024,11 @@
 						throw $objExc;
 					}
 
-				case 'AltFieldTimeOnly':
+				case 'Second':
 					try {
-						$this->blnAltFieldTimeOnly = QType::Cast($mixValue, QType::Boolean);
+						$this->intSecond = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'altFieldTimeOnly', $this->blnAltFieldTimeOnly);
+							$this->CallJqUiMethod(true, 'option', 'second', $this->intSecond);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -759,11 +1036,23 @@
 						throw $objExc;
 					}
 
-				case 'ShowTimepicker':
+				case 'Millisec':
 					try {
-						$this->blnShowTimepicker = QType::Cast($mixValue, QType::Boolean);
+						$this->intMillisec = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'showTimepicker', $this->blnShowTimepicker);
+							$this->CallJqUiMethod(true, 'option', 'millisec', $this->intMillisec);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Microsec':
+					try {
+						$this->intMicrosec = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'microsec', $this->intMicrosec);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -783,11 +1072,11 @@
 						throw $objExc;
 					}
 
-				case 'TimezoneIso8609':
+				case 'HourMin':
 					try {
-						$this->blnTimezoneIso8609 = QType::Cast($mixValue, QType::Boolean);
+						$this->intHourMin = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'timezoneIso8609', $this->blnTimezoneIso8609);
+							$this->CallJqUiMethod(true, 'option', 'hourMin', $this->intHourMin);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -795,11 +1084,275 @@
 						throw $objExc;
 					}
 
-				case 'TimezoneList':
+				case 'MinuteMin':
 					try {
-						$this->arrTimezoneList = QType::Cast($mixValue, QType::ArrayType);
+						$this->intMinuteMin = QType::Cast($mixValue, QType::Integer);
 						if ($this->OnPage) {
-							$this->CallJqUiMethod(true, 'option', 'timezoneList', $this->arrTimezoneList);
+							$this->CallJqUiMethod(true, 'option', 'minuteMin', $this->intMinuteMin);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'SecondMin':
+					try {
+						$this->intSecondMin = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'secondMin', $this->intSecondMin);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MillisecMin':
+					try {
+						$this->intMillisecMin = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'millisecMin', $this->intMillisecMin);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MicrosecMin':
+					try {
+						$this->intMicrosecMin = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'microsecMin', $this->intMicrosecMin);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'HourMax':
+					try {
+						$this->intHourMax = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'hourMax', $this->intHourMax);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MinuteMax':
+					try {
+						$this->intMinuteMax = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'minuteMax', $this->intMinuteMax);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'SecondMax':
+					try {
+						$this->intSecondMax = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'secondMax', $this->intSecondMax);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MillisecMax':
+					try {
+						$this->intMillisecMax = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'millisecMax', $this->intMillisecMax);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MicrosecMax':
+					try {
+						$this->intMicrosecMax = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'microsecMax', $this->intMicrosecMax);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'HourGrid':
+					try {
+						$this->intHourGrid = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'hourGrid', $this->intHourGrid);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MinuteGrid':
+					try {
+						$this->intMinuteGrid = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'minuteGrid', $this->intMinuteGrid);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'SecondGrid':
+					try {
+						$this->intSecondGrid = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'secondGrid', $this->intSecondGrid);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MillisecGrid':
+					try {
+						$this->intMillisecGrid = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'millisecGrid', $this->intMillisecGrid);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MicrosecGrid':
+					try {
+						$this->intMicrosecGrid = QType::Cast($mixValue, QType::Integer);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'microsecGrid', $this->intMicrosecGrid);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'ShowButtonPanel':
+					try {
+						$this->blnShowButtonPanel = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'showButtonPanel', $this->blnShowButtonPanel);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'TimeOnly':
+					try {
+						$this->blnTimeOnly = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'timeOnly', $this->blnTimeOnly);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'TimeOnlyShowDate':
+					try {
+						$this->blnTimeOnlyShowDate = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'timeOnlyShowDate', $this->blnTimeOnlyShowDate);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'OnSelect':
+					try {
+						$this->strOnSelect = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'onSelect', $this->strOnSelect);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'AlwaysSetTime':
+					try {
+						$this->blnAlwaysSetTime = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'alwaysSetTime', $this->blnAlwaysSetTime);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Separator':
+					try {
+						$this->strSeparator = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'separator', $this->strSeparator);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'PickerTimeFormat':
+					try {
+						$this->strPickerTimeFormat = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'pickerTimeFormat', $this->strPickerTimeFormat);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'PickerTimeSuffix':
+					try {
+						$this->strPickerTimeSuffix = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'pickerTimeSuffix', $this->strPickerTimeSuffix);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'ShowTimepicker':
+					try {
+						$this->blnShowTimepicker = QType::Cast($mixValue, QType::Boolean);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'showTimepicker', $this->blnShowTimepicker);
 						}
 						break;
 					} catch (QInvalidCastException $objExc) {
@@ -820,12 +1373,88 @@
 					}
 
 				case 'SliderAccessArgs':
-					$this->mixSliderAccessArgs = $mixValue;
-				
-					if ($this->OnPage) {
-						$this->CallJqUiMethod(true, 'option', 'sliderAccessArgs', $mixValue);
+					try {
+						$this->strSliderAccessArgs = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'sliderAccessArgs', $this->strSliderAccessArgs);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
 					}
-					break;
+
+				case 'DefaultValue':
+					try {
+						$this->strDefaultValue = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'defaultValue', $this->strDefaultValue);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MinDateTime':
+					try {
+						$this->strMinDateTime = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'minDateTime', $this->strMinDateTime);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MaxDateTime':
+					try {
+						$this->strMaxDateTime = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'maxDateTime', $this->strMaxDateTime);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MinTime':
+					try {
+						$this->strMinTime = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'minTime', $this->strMinTime);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'MaxTime':
+					try {
+						$this->strMaxTime = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'maxTime', $this->strMaxTime);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Parse':
+					try {
+						$this->strParse = QType::Cast($mixValue, QType::String);
+						if ($this->OnPage) {
+							$this->CallJqUiMethod(true, 'option', 'parse', $this->strParse);
+						}
+						break;
+					} catch (QInvalidCastException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
 
 				case 'BeforeShow':
 					try {
@@ -855,11 +1484,6 @@
 					}
 
 
-				case 'Enabled':
-					$this->Disabled = !$mixValue;	// Tie in standard QCubed functionality
-					parent::__set($strName, $mixValue);
-					break;
-					
 				default:
 					try {
 						parent::__set($strName, $mixValue);

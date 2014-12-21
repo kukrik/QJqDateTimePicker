@@ -3,15 +3,15 @@
 $objPlugin = new QPlugin();
 $objPlugin->strName = "QJqDateTimePicker";
 $objPlugin->strDescription = 'Date time picker control based on <a href="http://trentrichardson.com/examples/timepicker">jQuery date picker plugin</a>.';
-$objPlugin->strVersion = "0.5";
+$objPlugin->strVersion = "0.6";
 $objPlugin->strPlatformVersion = "2.3";
 $objPlugin->strAuthorName = "Vardan Akopian";
 $objPlugin->strAuthorEmail = "vakopian+qcubed [at] gmail [dot] com";
 
 $components = array();
 
-$components[] = new QPluginJsFile("js/jquery-ui-timepicker-addon-0.9.9.min.js");
-$components[] = new QPluginJsFile("js/jquery-ui-timepicker-addon-0.9.9.js");
+$components[] = new QPluginJsFile("js/jquery-ui-timepicker-addon-1.5.0.min.js");
+$components[] = new QPluginJsFile("js/jquery-ui-timepicker-addon-1.5.0.js");
 $components[] = new QPluginCssFile("css");
 
 $components[] = new QPluginControlFile("includes/QJqDateTimePicker.class.php");
